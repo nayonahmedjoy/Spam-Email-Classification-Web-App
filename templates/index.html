@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Spam Email Detector</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: #fff;
+        }
+
+        .card {
+            background: #111827;
+            max-width: 600px;
+            width: 100%;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        h1 {
+            font-size: 26px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #9ca3af;
+            margin-bottom: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 130px;
+            padding: 14px;
+            border-radius: 10px;
+            border: none;
+            resize: none;
+            font-size: 15px;
+            outline: none;
+            background: #1f2933;
+            color: #fff;
+        }
+
+        textarea::placeholder {
+            color: #6b7280;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            flex: 1;
+            padding: 12px;
+            font-size: 15px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .check-btn {
+            background: #22c55e;
+            color: #062e14;
+        }
+
+        .check-btn:hover {
+            background: #16a34a;
+        }
+
+        .about-btn {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .about-btn:hover {
+            background: #2563eb;
+        }
+
+        .result {
+            margin-top: 25px;
+            padding: 15px;
+            border-radius: 12px;
+            font-size: 20px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .spam {
+            background: rgba(239, 68, 68, 0.15);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.4);
+        }
+
+        .ham {
+            background: rgba(34, 197, 94, 0.15);
+            color: #4ade80;
+            border: 1px solid rgba(34, 197, 94, 0.4);
+        }
+
+        footer {
+            margin-top: 25px;
+            text-align: center;
+            font-size: 13px;
+            color: #6b7280;
+        }
+
+        footer a {
+            color: #60a5fa;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h1>📧 Spam Email Classifier</h1>
+    <p>Paste an email or SMS message and let the ML model decide.</p>
+
+    <form method="POST">
+        <textarea name="email" placeholder="Enter your message here..." required>{{ email_text }}</textarea>
+
+        <div class="btn-group">
+            <button type="submit" class="check-btn">Check Spam</button>
+            <button type="button" class="about-btn"
+                onclick="window.open('https://www.linkedin.com/in/nayonahmed/', '_blank')">
+                About Dev
+            </button>
+        </div>
+    </form>
+
+    {% if prediction %}
+        <div class="result {% if prediction == 'SPAM' %}spam{% else %}ham{% endif %}">
+            {% if prediction == "SPAM" %}
+                🚨 This message is SPAM
+            {% else %}
+                ✅ This message is HAM
+            {% endif %}
+        </div>
+    {% endif %}
+
+    <footer>
+        Built with ❤️ using Machine Learning & Flask  
+        <br>
+        <a href="https://www.linkedin.com/in/nayonahmed/" target="_blank">
+            Nayon Ahmed
+        </a>
+    </footer>
+</div>
+
+</body>
+</html>
